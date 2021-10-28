@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <title>BMI Calculator</title>
+         <!-- Bootstrap CSS Style Sheet -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- regular style sheet -->
+        <link rel="stylesheet" href=" css/home.css ">
+
+        <!-- Jquery library   ---->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+        <!-- JS Section -->
+        <script>
+            window.onload = () => {
+            
+            // creates a global variable for BMI.
+            var bmi;
+            // Function for calculating BMI & animating the IMG 
+            document.getElementById("btn").addEventListener("click", calculateBMI);
+            document.getElementById("btn").addEventListener("click", resizeIMG);
+            document.getElementById("btn").addEventListener("click", changeSlider);
+
+            // Gets Selected Age
+            var insertedAge = document.getElementById("ages");
+            var selectedValue1 = insertedAge.options[insertedAge.selectedIndex].value;
+            // Gets Selected Gender
+            var insertedGender = document.getElementById("genders");
+            var selectedValue2 = insertedGender.options[insertedGender.selectedIndex].value;
+            // Checks if the values are male/female and under 20
+            if ((selectedValue1 == "under20") && (selectedValue2 == "male"))
+            {
+                alert("Please use BMI percentile chart (https://www.cdc.gov/growthcharts/data/set1clinical/cj41l023.pdf) to determine weight category.");  
+            }
+            else if ((selectedValue1 == "under20") && (selectedValue2 == "female"))
+            {
+                alert("Please use BMI percentile chart (https://www.cdc.gov/growthcharts/data/set1clinical/cj41l024.pdf) to determine weight category.");
+            }
+            
+            // BMI FUNCTION
+            function calculateBMI() {
+                var heights = parseFloat(document.getElementById('height').value);
+                var weights = parseFloat(document.getElementById('weight').value);
+
+                // Checking if its an empty value for height and weight.
+                if (heights === "" || isNaN(heights)) 
+                    result.innerHTML = "Provide a valid Height!";
+
+                else if (weights === "" || isNaN(weights)) 
+                    result.innerHTML = "Provide a valid Weight!";
+
+                // If both input is valid, calculate the bmi
+                else {
+                        // Fixing upto 2 decimal places
+                        bmi = ((weights * 703) / (heights * heights)).toFixed(2);
+                        document.getElementById("output").innerText = Math.round(bmi * 100) / 100;
+                        if (bmi <= 18.5){
+                            document.getElementById("comment").innerText = "Underweight";
+                        }
+                        else if (bmi > 18.5 && bmi <= 25.0){ 
+                            document.getElementById("comment").innerText = "Normal";
+                        }
+                        else if (bmi >= 25 && bmi <= 30) {
+                            document.getElementById("comment").innerText = "Overweight";
+                        }
+                        else {
+                            document.getElementById("comment").innerText = "Obese";
+                            alert("You are in the obese catergory of BMI, please refer to the new window for more info.")
+                            window.open("http://www.nhlbi.nih.gov/health/public/heart/obesity/lose_wt/control.htm");
+                        }
+                }
+            }
+
+            // ANIMATATION FUNCTION
+            function resizeIMG() {
+                var imageWrap = document.getElementById("wrap");
+                var heights = parseFloat(document.getElementById('height').value);
+                var weights = parseFloat(document.getElementById('weight').value);
+                bmi = ((weights * 703) / (heights * heights)).toFixed(2);
+                console.log(bmi);
+                if (bmi <= 18.5) {
+                    $('img').animate({
+                    width: '282px',
+                    height: '400px'
+                    });
+                }
+                else if(bmi > 18.5 && bmi <= 25.0 ) {
+                    $('img').animate({
+                    width: '482px',
+                    height: '482px',
+                    });
+                }
+                else if (bmi >= 25 && bmi <= 30) {
+                    $('img').animate({
+                    width: '682px',
+                    height: '482px',
+                    });
+                }
+                else {
+                    $('img').animate({
+                    width: '882px',
+                    height: '482px',
+                    });
+                }
+             }
+            function changeSlider() {
+                $('bmi-slider-div').animate({style: ("left:" + bmi)})
+            }
+        }
+        </script>
+    </head>
+        <!-- Bootstrapped Navbar -->
+        <header class="header_a">
+        <div class="navbar_main">
+        <nav class="navbar navbar-expand-lg sticky-top navbar-dark" style="background-color: #010101;">
+        <a class="navbar-brand" href="index.html">Scott's Website</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link" href="index.html">Home</a>
+            <a class="nav-item nav-link" href="https://www.usca.edu">USCA Website</a>
+            <a class="nav-item nav-link" href="./Assignments.html">Assignments</a>
+            <a class="nav-item nav-link" href="#portfolio">Portfolio</a>
+            <a class="nav-item nav-link" href="ContactMe.html">Contact Me</a>
+          </div>
+        </div>  
+        </nav>
+        </div>
+        </header>
+
+    <body>
+        <div class="containerForBMI">
+            <div class="grid1">
+                <h1>Body Mass Index Calculator:</h1>
+        
+                <!-- Enter your name, height, and weight: -->
+                <p>Enter your name: </p>
+                <input type="text" id="name"/> <br>
+                <p>Enter your height in Imperial:</p>
+                <input type="text" id="height"> <br>
+                <p>Enter your weight in Imperial:</p>
+                <input type="text" id="weight"><br>
+                <br>
+
+                <!-- Age Selector -->
+                <label for="ageSelector">Select your age:</label>
+                <select name="age" id="ages">
+                    <option value="selectAnAge">Please select an age!</option>
+                    <option value="under20">Under 20</option>
+                    <option value="20-29">20 - 29</option>
+                    <option value="30-50">30 - 50</option>
+                    <option value="50-70">50 - 70</option>
+                    <option value="Over70">Over 70</option>
+                </select><br>
+
+                <!-- Gender Selector -->
+                <br>
+                <label for="genderSelector">Select your gender:</label>
+                <select name="gender" id="genders">
+                    <option value="selectAGender">Please select a gender!</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select><br>   
+
+                <!-- Button to Calc -->
+                <br><p><button id="btn">Calculate</button></p>
+                <br><h1>Your BMI is: <span id="output">?</span></h1>
+                <h1>This means you are: <span id="comment">?</span></h1> 
+
+            </div>
+           
+            <div class="grid2">
+                <p>
+                    <div id="bmi-slider-div" style="width:482px;" class="measurement_slider ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" aria-disabled="false"> <!-- 11 -->
+                        <div id="underweight_bmi" style="width: 140px; background-color: rgb(233, 206, 11); float: left; margin: 0px; height: 10px;">Under</div>
+                        <div id="normal_bmi" style="width: 101px; float: left; margin: 0px; background-color: rgb(0, 210, 0); height: 10px;">Normal</div>
+                        <div id="overweight_bmi" style="width: 101px; float: left; margin: 0px; background-color: rgb(249, 148, 0); height: 10px;">Over</div>
+                        <a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 18%;"></a><div id="obese_bmi" style="width: 140px; float: left; margin: 0px; background-color: rgb(205, 17, 1); height: 10px;">Obese</div>
+                    </div>            
+                </p>
+                <br><img id="wrap" src="./img/Female_Mii.png"/>
+            </div>
+        </div>
+        </body>
+
+</html>

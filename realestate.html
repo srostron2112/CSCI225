@@ -1,0 +1,80 @@
+<head>
+    <!-- Introducing The Webpage -->
+    <title>Real Estate Loan Calculator</title>
+    <!-- regular style sheet -->
+    <link rel="stylesheet" href="./css/loan.css">
+    <script src="js/main.js"></script>
+</head>
+<!-- Actual Webpage -->
+<body>
+    <div class ="navbar">
+        <ul id ="nav">
+           <li><input id="button3" type="submit" value="Home"/></li> 
+           <li><input id="button4" type="submit" value="Buy"/></li> 
+           <li><input id="button6" type="submit" value="Sale"/></li>
+           <li><input id="button5" type="submit" value="Loan"/></li>  
+           <li><input id="button7" type="submit" value="About Us"/></li> 
+        </ul>
+    </div>
+    <div id="test"></div>
+    <div id="form">
+    <div class ="inputs">
+    <p>Loan Information</p>
+    <label for="input1">Loan Amount:</label> <input type="text" id="input1" name="input1" required>$<br> 
+    <label for="input2">Interest Rate:</label> <input type="text" id="input2" name="input2" required>%<br>
+    <label for="input3">Loan Term:</label> <input type="text" id="input3" name="input3" required>years<br>
+    <!-- label for date and year -->
+    <label for="date">Start Date:</label>
+    <select id="date">
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+    </select>
+    <!-- Years -->
+    <select id="year">
+        <option>2010</option>
+        <option>2011</option>
+        <option>2012</option>
+        <option>2013</option>
+        <option>2014</option>
+        <option>2015</option>
+        <option>2016</option>
+        <option>2017</option>
+        <option>2018</option>
+        <option>2019</option>
+        <option>2020</option>
+        <option>2021</option>
+        <option>2022</option>
+        <option>2023</option>
+        <option>2024</option>
+        <option>2025</option>
+        <option>2026</option>
+        <option>2027</option>
+        <option>2028</option>
+        <option>2029</option>
+        <option>2030</option>
+    </select><br>
+
+    <!-- Results -->
+    <label for="results">Show results by:</label>
+    <select id="results">
+        <option>Year</option>
+        <option>Month</option>
+        <option>Day</option>
+     </select><br>
+
+    <!-- Button for sumbit of calc -->
+    <input id="butto " type="submit" value="Calculate"/>
+    </div>
+</div>
+</body>
+</html>
